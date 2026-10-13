@@ -72,6 +72,11 @@
   }
 }
 
+/* Pretzel's crossfade slideshow is replaced by the site's own scroll gallery (see lib/pretzel.ts). */
+[data-ve-carousel] > .pretzel-carousel {
+  display: none !important;
+}
+
 @utility no-scrollbar {
   scrollbar-width: none;
   &::-webkit-scrollbar {

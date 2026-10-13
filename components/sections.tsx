@@ -114,7 +114,7 @@ export function GallerySection({
           <h3 className="mt-2 text-4xl font-extrabold tracking-tight text-primary md:text-5xl">{title}</h3>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink">{description}</p>
         </div>
-        <Gallery items={items} tone={tone} />
+        <Gallery items={items} tone={tone} carousel={id} />
       </div>
     </section>
   )

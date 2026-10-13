@@ -7,15 +7,19 @@ import type { GalleryItem } from '@/lib/content'
 import { ImagePlaceholder } from '@/components/image-placeholder'
 import { useLanguage } from '@/components/language-provider'
 import { cn } from '@/lib/utils'
+import { usePretzelCarousel } from '@/lib/pretzel'
 
 export function Gallery({
-  items,
+  items: fallbackItems,
   tone = 'cream',
+  carousel,
 }: {
   items: GalleryItem[]
   tone?: 'cream' | 'sunshine'
+  carousel?: string
 }) {
   const { t } = useLanguage()
+  const items = usePretzelCarousel(carousel, fallbackItems)
   const viewable = items.filter((item) => item.src)
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
@@ -62,7 +66,12 @@ export function Gallery({
 
   return (
     <>
-      <div className="flex min-w-0 flex-col gap-4">
+      <div className="relative flex min-w-0 flex-col gap-4">
+      {carousel && (
+        // Pretzel needs this container empty; it anchors the edit-mode "Manage slideshow" button.
+        // Its injected visitor slideshow is hidden in globals.css so the scroll track below stays in charge.
+        <div data-ve-carousel={carousel} aria-hidden="true" className="pointer-events-none absolute inset-0" />
+      )}
       <ul
         ref={trackRef}
         onScroll={updateEdges}
