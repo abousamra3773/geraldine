@@ -47,9 +47,21 @@ export function localizeItems(items: LocalizedGalleryItem[], locale: Locale): Ga
   return items.map((item) => ({ src: item.src, alt: item.alt[locale], caption: item.caption[locale] }))
 }
 
-export const stays: LocalizedGalleryItem[] = [
+const GALLERY_SIZE = 10
+
+function fillGallery(items: LocalizedGalleryItem[], label: Localized): LocalizedGalleryItem[] {
+  const extras = Array.from({ length: Math.max(0, GALLERY_SIZE - items.length) }, (_, i) => {
+    const n = String(items.length + i + 1).padStart(2, '0')
+    return {
+      alt: { en: `${label.en} image placeholder ${n}`, es: `Espacio para imagen de ${label.es} ${n}` },
+      caption: { en: `${label.en} ${n}`, es: `${label.es} ${n}` },
+    }
+  })
+  return [...items, ...extras]
+}
+
+export const stays: LocalizedGalleryItem[] = fillGallery([
   {
-    src: '/images/stays/dali-lounge.jpg',
     alt: {
       en: 'Hotel lounge with white sofas, pink and grey cushions, and a large Dalí "Les Dîners de Gala" tapestry on the wall',
       es: 'Salón de hotel con sofás blancos, cojines rosas y grises, y un gran tapiz de Dalí "Les Dîners de Gala" en la pared',
@@ -57,7 +69,6 @@ export const stays: LocalizedGalleryItem[] = [
     caption: { en: 'The Dalí Lounge', es: 'El Salón Dalí' },
   },
   {
-    src: '/images/stays/gilded-cart.jpg',
     alt: {
       en: 'Cream and gold ornate display cart beside a classical statue in a sunlit hotel dining room',
       es: 'Carrito ornamentado en crema y dorado junto a una estatua clásica en un comedor de hotel soleado',
@@ -65,18 +76,16 @@ export const stays: LocalizedGalleryItem[] = [
     caption: { en: 'Gilded Service', es: 'Servicio Dorado' },
   },
   {
-    src: '/images/stays/floral-lobby.jpg',
     alt: {
       en: 'Tall lacquered vase overflowing with pink lilies and branches in an elegant hotel lobby',
       es: 'Jarrón lacado alto lleno de lirios rosas y ramas en un elegante vestíbulo de hotel',
     },
     caption: { en: 'Lobby in Bloom', es: 'Vestíbulo en Flor' },
   },
-]
+], { en: 'Stay', es: 'Estancia' })
 
-export const taste: LocalizedGalleryItem[] = [
+export const taste: LocalizedGalleryItem[] = fillGallery([
   {
-    src: '/images/taste/cherry-straw.jpg',
     alt: {
       en: 'Close-up of glossy lips sipping through a curly red straw, glitter-red nails holding a Coca-Cola bottle',
       es: 'Primer plano de labios brillantes bebiendo con una pajita roja rizada, uñas rojas con brillo sosteniendo una botella de Coca-Cola',
@@ -84,7 +93,6 @@ export const taste: LocalizedGalleryItem[] = [
     caption: { en: 'Cherry Sip', es: 'Sorbo de Cereza' },
   },
   {
-    src: '/images/taste/forest-glow.jpg',
     alt: {
       en: 'Woman in a sparkling pink leotard and silver headwrap tilting her head back among green forest leaves',
       es: 'Mujer con un maillot rosa brillante y turbante plateado inclinando la cabeza entre hojas verdes del bosque',
@@ -92,18 +100,16 @@ export const taste: LocalizedGalleryItem[] = [
     caption: { en: 'Forest Glow', es: 'Brillo del Bosque' },
   },
   {
-    src: '/images/taste/poolside.jpg',
     alt: {
       en: 'Woman in a black swimsuit dipping a toe into a blue pool beneath a tall palm tree and bright clouds',
       es: 'Mujer con bañador negro metiendo un pie en una piscina azul bajo una palmera alta y nubes brillantes',
     },
     caption: { en: 'Poolside', es: 'Junto a la Piscina' },
   },
-]
+], { en: 'Taste', es: 'Gusto' })
 
-export const places: LocalizedGalleryItem[] = [
+export const places: LocalizedGalleryItem[] = fillGallery([
   {
-    src: '/images/places/neon-rain.jpg',
     alt: {
       en: 'Woman in a camel blazer dress holding a yellow umbrella on a rainy, neon-lit city street at night',
       es: 'Mujer con un vestido blazer color camel sosteniendo un paraguas amarillo en una calle lluviosa iluminada con neones de noche',
@@ -111,7 +117,6 @@ export const places: LocalizedGalleryItem[] = [
     caption: { en: 'Neon Rain', es: 'Lluvia de Neón' },
   },
   {
-    src: '/images/places/cable-car.jpg',
     alt: {
       en: 'Red cable car with a Lebanese flag gliding over a coastal city at golden hour',
       es: 'Teleférico rojo con la bandera libanesa sobre una ciudad costera en la hora dorada',
@@ -119,21 +124,14 @@ export const places: LocalizedGalleryItem[] = [
     caption: { en: 'Above the Coast', es: 'Sobre la Costa' },
   },
   {
-    src: '/images/places/sea-village.jpg',
     alt: {
       en: 'Woman wading in clear Mediterranean water facing a white seaside village and mountains',
       es: 'Mujer en las aguas cristalinas del Mediterráneo frente a un pueblo costero blanco y montañas',
     },
     caption: { en: 'Into the Blue', es: 'Hacia el Azul' },
   },
-]
+], { en: 'Place', es: 'Lugar' })
 
-export const moodBoard: LocalizedGalleryItem[] = [1, 2, 3].map((n) => ({
-  alt: { en: `Mood board placeholder ${n}`, es: `Espacio para mood board ${n}` },
-  caption: { en: `Mood 0${n}`, es: `Mood 0${n}` },
-}))
+export const moodBoard: LocalizedGalleryItem[] = fillGallery([], { en: 'Mood', es: 'Mood' })
 
-export const brands: LocalizedGalleryItem[] = [1, 2, 3].map((n) => ({
-  alt: { en: `Brand campaign placeholder ${n}`, es: `Espacio para campaña de marca ${n}` },
-  caption: { en: `Brand 0${n}`, es: `Marca 0${n}` },
-}))
+export const brands: LocalizedGalleryItem[] = fillGallery([], { en: 'Brand', es: 'Marca' })

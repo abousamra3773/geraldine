@@ -37,8 +37,10 @@ export const dictionary = {
     gallery: {
       open: (caption: string) => `Open ${caption} full size`,
       close: 'Close',
-      previous: 'Previous image',
-      next: 'Next image',
+    previous: 'Previous image',
+    next: 'Next image',
+    label: 'Image gallery, scroll horizontally',
+    count: (n: number) => `${n} images · Scroll`,
     },
     footer: {
       closingImage: 'Closing image',
@@ -82,8 +84,10 @@ export const dictionary = {
     gallery: {
       open: (caption: string) => `Abrir ${caption} en tamaño completo`,
       close: 'Cerrar',
-      previous: 'Imagen anterior',
-      next: 'Imagen siguiente',
+    previous: 'Imagen anterior',
+    next: 'Imagen siguiente',
+    label: 'Galería de imágenes, desplázate horizontalmente',
+    count: (n: number) => `${n} imágenes · Desliza`,
     },
     footer: {
       closingImage: 'Imagen de cierre',
