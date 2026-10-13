@@ -32,14 +32,6 @@ export function getNavigation(t: Dictionary): NavGroup[] {
         { label: t.nav.places, href: '#places' },
       ],
     },
-    {
-      label: t.nav.creativeDirection,
-      href: '#creative-direction',
-      children: [
-        { label: t.nav.moodBoard, href: '#mood-board' },
-        { label: t.nav.brands, href: '#brands' },
-      ],
-    },
   ]
 }
 
@@ -131,7 +123,3 @@ export const places: LocalizedGalleryItem[] = fillGallery([
     caption: { en: 'Into the Blue', es: 'Hacia el Azul' },
   },
 ], { en: 'Place', es: 'Lugar' })
-
-export const moodBoard: LocalizedGalleryItem[] = fillGallery([], { en: 'Mood', es: 'Mood' })
-
-export const brands: LocalizedGalleryItem[] = fillGallery([], { en: 'Brand', es: 'Marca' })
