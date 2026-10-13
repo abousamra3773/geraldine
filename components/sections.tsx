@@ -2,9 +2,8 @@
 
 import Image from 'next/image'
 import { AtSign, Mail } from 'lucide-react'
-import { artistName, type GalleryItem } from '@/lib/content'
+import { artistName } from '@/lib/content'
 import { ImagePlaceholder } from '@/components/image-placeholder'
-import { Gallery } from '@/components/gallery'
 import { useLanguage } from '@/components/language-provider'
 import { cn } from '@/lib/utils'
 
@@ -93,14 +92,12 @@ export function GallerySection({
   eyebrow,
   title,
   description,
-  items,
   tone,
 }: {
   id: string
   eyebrow: string
   title: string
   description: string
-  items: GalleryItem[]
   tone: 'cream' | 'sunshine'
 }) {
   return (
@@ -114,7 +111,13 @@ export function GallerySection({
           <h3 className="mt-2 text-4xl font-extrabold tracking-tight text-primary md:text-5xl">{title}</h3>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink">{description}</p>
         </div>
-        <Gallery items={items} tone={tone} />
+        <div
+          data-ve-carousel={id}
+          className={cn(
+            'relative aspect-[4/3] w-full overflow-hidden',
+            tone === 'cream' ? 'bg-sunshine/40' : 'bg-cream/60',
+          )}
+        />
       </div>
     </section>
   )
