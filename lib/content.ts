@@ -47,7 +47,20 @@ export function localizeItems(items: LocalizedGalleryItem[], locale: Locale): Ga
   return items.map((item) => ({ src: item.src, alt: item.alt[locale], caption: item.caption[locale] }))
 }
 
-export const stays: LocalizedGalleryItem[] = [
+const GALLERY_SIZE = 10
+
+function fillGallery(items: LocalizedGalleryItem[], label: Localized): LocalizedGalleryItem[] {
+  const extras = Array.from({ length: Math.max(0, GALLERY_SIZE - items.length) }, (_, i) => {
+    const n = String(items.length + i + 1).padStart(2, '0')
+    return {
+      alt: { en: `${label.en} image placeholder ${n}`, es: `Espacio para imagen de ${label.es} ${n}` },
+      caption: { en: `${label.en} ${n}`, es: `${label.es} ${n}` },
+    }
+  })
+  return [...items, ...extras]
+}
+
+export const stays: LocalizedGalleryItem[] = fillGallery([
   {
     alt: {
       en: 'Hotel lounge with white sofas, pink and grey cushions, and a large Dalí "Les Dîners de Gala" tapestry on the wall',
@@ -69,9 +82,9 @@ export const stays: LocalizedGalleryItem[] = [
     },
     caption: { en: 'Lobby in Bloom', es: 'Vestíbulo en Flor' },
   },
-]
+], { en: 'Stay', es: 'Estancia' })
 
-export const taste: LocalizedGalleryItem[] = [
+export const taste: LocalizedGalleryItem[] = fillGallery([
   {
     alt: {
       en: 'Close-up of glossy lips sipping through a curly red straw, glitter-red nails holding a Coca-Cola bottle',
@@ -93,9 +106,9 @@ export const taste: LocalizedGalleryItem[] = [
     },
     caption: { en: 'Poolside', es: 'Junto a la Piscina' },
   },
-]
+], { en: 'Taste', es: 'Gusto' })
 
-export const places: LocalizedGalleryItem[] = [
+export const places: LocalizedGalleryItem[] = fillGallery([
   {
     alt: {
       en: 'Woman in a camel blazer dress holding a yellow umbrella on a rainy, neon-lit city street at night',
@@ -117,14 +130,8 @@ export const places: LocalizedGalleryItem[] = [
     },
     caption: { en: 'Into the Blue', es: 'Hacia el Azul' },
   },
-]
+], { en: 'Place', es: 'Lugar' })
 
-export const moodBoard: LocalizedGalleryItem[] = [1, 2, 3].map((n) => ({
-  alt: { en: `Mood board placeholder ${n}`, es: `Espacio para mood board ${n}` },
-  caption: { en: `Mood 0${n}`, es: `Mood 0${n}` },
-}))
+export const moodBoard: LocalizedGalleryItem[] = fillGallery([], { en: 'Mood', es: 'Mood' })
 
-export const brands: LocalizedGalleryItem[] = [1, 2, 3].map((n) => ({
-  alt: { en: `Brand campaign placeholder ${n}`, es: `Espacio para campaña de marca ${n}` },
-  caption: { en: `Brand 0${n}`, es: `Marca 0${n}` },
-}))
+export const brands: LocalizedGalleryItem[] = fillGallery([], { en: 'Brand', es: 'Marca' })

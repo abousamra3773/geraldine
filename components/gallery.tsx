@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 import type { GalleryItem } from '@/lib/content'
@@ -43,11 +43,38 @@ export function Gallery({
 
   const active = activeIndex !== null ? viewable[activeIndex] : null
 
+  const trackRef = useRef<HTMLUListElement>(null)
+  const [atStart, setAtStart] = useState(true)
+  const [atEnd, setAtEnd] = useState(false)
+
+  const updateEdges = useCallback(() => {
+    const el = trackRef.current
+    if (!el) return
+    setAtStart(el.scrollLeft <= 4)
+    setAtEnd(el.scrollLeft + el.clientWidth >= el.scrollWidth - 4)
+  }, [])
+
+  const scrollTrack = (direction: 1 | -1) => {
+    const el = trackRef.current
+    if (!el) return
+    el.scrollBy({ left: direction * el.clientWidth, behavior: 'smooth' })
+  }
+
   return (
     <>
-      <ul className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3">
-        {items.map((item, i) => (
-          <li key={item.src ?? item.caption} className={cn(i === 0 && 'col-span-2 md:col-span-1')}>
+      <div className="flex min-w-0 flex-col gap-4">
+      <ul
+        ref={trackRef}
+        onScroll={updateEdges}
+        tabIndex={0}
+        aria-label={t.gallery.label}
+        className="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain scroll-smooth focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+      >
+        {items.map((item) => (
+          <li
+            key={item.src ?? item.caption}
+            className="w-[78%] shrink-0 snap-start sm:w-[calc((100%-1rem)/2)] md:w-[calc((100%-2rem)/3)]"
+          >
             <figure>
               {item.src ? (
                 <button
@@ -76,6 +103,35 @@ export function Gallery({
           </li>
         ))}
       </ul>
+
+      <div className="flex items-center justify-between gap-4">
+        <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground" aria-live="polite">
+          {t.gallery.count(items.length)}
+        </p>
+        <div className="flex gap-2">
+          <button
+            type="button"
+            onClick={() => scrollTrack(-1)}
+            disabled={atStart}
+            className={cn(
+              'border-2 border-primary p-2 text-primary transition-colors hover:bg-primary hover:text-primary-foreground disabled:pointer-events-none disabled:opacity-30',
+            )}
+          >
+            <ChevronLeft className="size-5" aria-hidden="true" />
+            <span className="sr-only">{t.gallery.previous}</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => scrollTrack(1)}
+            disabled={atEnd}
+            className="border-2 border-primary p-2 text-primary transition-colors hover:bg-primary hover:text-primary-foreground disabled:pointer-events-none disabled:opacity-30"
+          >
+            <ChevronRight className="size-5" aria-hidden="true" />
+            <span className="sr-only">{t.gallery.next}</span>
+          </button>
+        </div>
+      </div>
+      </div>
 
       {active && (
         <div
