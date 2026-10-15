@@ -6,6 +6,7 @@ export const dictionary = {
   en: {
     nav: {
       about: 'About',
+      gallery: 'Gallery',
       world: 'World',
       stays: 'Stays',
       taste: 'Taste',
@@ -35,12 +36,13 @@ export const dictionary = {
       brands: 'Campaigns and collaborations, from concept to final frame.',
     },
     gallery: {
-      open: (caption: string) => `Open ${caption} full size`,
+      open: 'View larger',
       close: 'Close',
-    previous: 'Previous image',
-    next: 'Next image',
-    label: 'Image gallery, scroll horizontally',
-    count: (n: number) => `${n} images · Scroll`,
+      previous: 'Previous image',
+      next: 'Next image',
+      label: 'Photo gallery',
+      viewer: 'Photo viewer',
+      photoAlt: (n: number) => `Photo ${n}`,
     },
     footer: {
       closingImage: 'Closing image',
@@ -53,6 +55,7 @@ export const dictionary = {
   es: {
     nav: {
       about: 'Sobre mí',
+      gallery: 'Galería',
       world: 'Mundo',
       stays: 'Estancias',
       taste: 'Sabor',
@@ -82,12 +85,13 @@ export const dictionary = {
       brands: 'Campañas y colaboraciones, del concepto a la imagen final.',
     },
     gallery: {
-      open: (caption: string) => `Abrir ${caption} en tamaño completo`,
+      open: 'Ver más grande',
       close: 'Cerrar',
-    previous: 'Imagen anterior',
-    next: 'Imagen siguiente',
-    label: 'Galería de imágenes, desplázate horizontalmente',
-    count: (n: number) => `${n} imágenes · Desliza`,
+      previous: 'Imagen anterior',
+      next: 'Imagen siguiente',
+      label: 'Galería de fotos',
+      viewer: 'Visor de fotos',
+      photoAlt: (n: number) => `Foto ${n}`,
     },
     footer: {
       closingImage: 'Imagen de cierre',

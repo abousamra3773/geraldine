@@ -23,15 +23,8 @@ export const artistName = 'Geraldine Thomas'
 export function getNavigation(t: Dictionary): NavGroup[] {
   return [
     { label: t.nav.about, href: '#about' },
-    {
-      label: t.nav.world,
-      href: '#world',
-      children: [
-        { label: t.nav.stays, href: '#stays' },
-        { label: t.nav.taste, href: '#taste' },
-        { label: t.nav.places, href: '#places' },
-      ],
-    },
+    { label: t.nav.gallery, href: '#gallery' },
+    { label: t.nav.contact, href: '#contact' },
   ]
 }
 
