@@ -11,14 +11,9 @@ export function Hero() {
   return (
     <section id="about" className="grid scroll-mt-20 md:grid-cols-2">
       <div className="flex flex-col justify-between gap-12 bg-sunshine px-6 py-12 md:px-10 md:py-16">
-        <div>
-          <h1 className="text-balance text-6xl font-extrabold leading-[0.9] tracking-tight text-primary sm:text-7xl lg:text-8xl">
-            {artistName}
-          </h1>
-          <p className="mt-6 max-w-xs text-xs font-semibold uppercase leading-relaxed tracking-widest text-ink">
-            {t.hero.tagline}
-          </p>
-        </div>
+        <h1 className="text-balance text-6xl font-extrabold leading-[0.9] tracking-tight text-primary sm:text-7xl lg:text-8xl">
+          {artistName}
+        </h1>
         <a
           href="#contact"
           className="w-fit bg-primary px-10 py-3 text-xs font-bold uppercase tracking-widest text-primary-foreground transition-colors hover:bg-accent"

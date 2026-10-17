@@ -16,7 +16,6 @@ export const dictionary = {
       language: 'Language',
     },
     hero: {
-      tagline: 'Photographer & creative director with an eye for spaces, flavor and story',
       photoAlt: (name: string) => `${name} in a yellow dress standing in a field of sunflowers`,
     },
     portfolio: {
@@ -55,7 +54,6 @@ export const dictionary = {
       language: 'Idioma',
     },
     hero: {
-      tagline: 'Fotógrafa y directora creativa con ojo para los espacios, el sabor y las historias',
       photoAlt: (name: string) => `${name} con un vestido amarillo en un campo de girasoles`,
     },
     portfolio: {
