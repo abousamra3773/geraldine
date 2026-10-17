@@ -2,11 +2,8 @@
 
 import Image from 'next/image'
 import { AtSign, Mail } from 'lucide-react'
-import { artistName, type GalleryItem } from '@/lib/content'
-import { ImagePlaceholder } from '@/components/image-placeholder'
-import { Gallery } from '@/components/gallery'
+import { artistName } from '@/lib/content'
 import { useLanguage } from '@/components/language-provider'
-import { cn } from '@/lib/utils'
 
 export function Hero() {
   const { t } = useLanguage()
@@ -43,91 +40,11 @@ export function Hero() {
   )
 }
 
-export function Banner({
-  id,
-  title,
-  imageSrc,
-  imageAlt,
-  links,
-}: {
-  id: string
-  title: string
-  imageSrc?: string
-  imageAlt?: string
-  links: { label: string; href: string }[]
-}) {
-  const { t } = useLanguage()
-
-  return (
-    <section id={id} className="relative flex aspect-[4/3] items-center justify-center overflow-hidden bg-sunshine sm:aspect-[16/7]">
-      {imageSrc ? (
-        <Image src={imageSrc} alt={imageAlt ?? ''} fill sizes="(min-width: 1152px) 1152px, 100vw" className="object-cover" />
-      ) : (
-        <div className="absolute inset-0">
-          <ImagePlaceholder label={t.sections.bannerImage(title)} tone="sunshine" className="items-start justify-end border-none pb-6" />
-        </div>
-      )}
-      <div className="relative flex flex-col items-center gap-4 px-4">
-        <h2 className="text-balance bg-primary px-8 py-3 text-center text-4xl font-extrabold tracking-tight text-sunshine sm:text-6xl md:px-12 md:text-7xl">
-          {title}
-        </h2>
-        <ul className="flex flex-wrap justify-center gap-2">
-          {links.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                className="block bg-cream px-4 py-2 text-xs font-bold uppercase tracking-widest text-primary transition-colors hover:bg-sunshine"
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
-  )
-}
-
-export function GallerySection({
-  id,
-  eyebrow,
-  title,
-  description,
-  items,
-  tone,
-}: {
-  id: string
-  eyebrow: string
-  title: string
-  description: string
-  items: GalleryItem[]
-  tone: 'cream' | 'sunshine'
-}) {
-  return (
-    <section
-      id={id}
-      className={cn('px-6 py-16 md:px-10 md:py-24', tone === 'cream' ? 'bg-cream' : 'bg-sunshine')}
-    >
-      <div className="grid gap-10 md:grid-cols-[1fr_2.2fr] md:gap-14">
-        <div>
-          <p className="text-xs font-bold uppercase tracking-widest text-ink/70">{eyebrow}</p>
-          <h3 className="mt-2 text-4xl font-extrabold tracking-tight text-primary md:text-5xl">{title}</h3>
-          <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink">{description}</p>
-        </div>
-        <Gallery items={items} tone={tone} />
-      </div>
-    </section>
-  )
-}
-
 export function ContactFooter() {
   const { t } = useLanguage()
 
   return (
     <footer id="contact" className="border-t-8 border-background">
-      <div className="aspect-[16/7] bg-sunshine sm:aspect-[16/5]">
-        <ImagePlaceholder label={t.footer.closingImage} tone="sunshine" className="border-none" />
-      </div>
       <div className="bg-primary px-6 py-12 text-primary-foreground md:px-10 md:py-14">
         <div className="flex items-start justify-between gap-6">
           <h2 className="text-4xl font-extrabold tracking-tight text-sunshine md:text-5xl">{t.footer.workWithMe}</h2>
