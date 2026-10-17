@@ -1,6 +1,7 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Plus_Jakarta_Sans } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
 
 const jakarta = Plus_Jakarta_Sans({
@@ -32,6 +33,11 @@ export default function RootLayout({
     <html lang="en" className={jakarta.variable}>
       <body className="antialiased">
         {children}
+        <Script
+          src="https://pretzel-it.com/embed.js"
+          data-domain="geraldinethomas.vercel.app"
+          strategy="afterInteractive"
+        />
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
